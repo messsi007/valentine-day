@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine's Day 💖</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+:root {
+    --main-color: #ff4d6d;
+}
+
+body {
+    background: linear-gradient(135deg, #fff0f5, #ffe6f0);
+    min-height: 100vh;
+}
+
+/* HEADER */
+header {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: var(--main-color);
+}
+
+header p {
+    margin-top: 10px;
+    color: #555;
+    font-size: 1.1rem;
+}
+
+input[type="color"] {
+    margin-top: 15px;
+    width: 60px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+}
+
+/* GALLERY */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 40px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.gallery img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 20px;
+    transition: 0.4s;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
+}
+
+/* BUTTON */
+.btn-section {
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+button {
+    background: var(--main-color);
+    border: none;
+    padding: 12px 35px;
+    border-radius: 30px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* POPUP */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: white;
+    padding: 40px;
+    border-radius: 25px;
+    text-align: center;
+    max-width: 350px;
+    width: 90%;
+    position: relative;
+    animation: popupScale 0.4s ease;
+}
+
+.popup-content h2 {
+    color: var(--main-color);
+}
+
+.doll {
+    width: 180px;
+    margin: 20px 0;
+    animation: float 2s infinite ease-in-out;
+}
+
+.close-btn {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #999;
+}
+
+.close-btn:hover {
+    color: red;
+}
+
+/* Animations */
+@keyframes popupScale {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Floating Hearts */
+.heart {
+    position: fixed;
+    bottom: 0;
+    font-size: 20px;
+    animation: rise 5s linear infinite;
+    color: var(--main-color);
+}
+
+@keyframes rise {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* Responsive */
+@media(max-width:768px){
+    header h1 {
+        font-size: 2rem;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Happy Valentine's Day 💕</h1>
+    <p>You make my world beautiful every day 💖</p>
+</header>
+
+<section class="gallery">
+    <img src="image/image1.jpg" alt="Valentine Image 1">
+        <img src="image/image2.jpg" alt="Valentine Image 1">
+            <img src="image/image3.jpg" alt="Valentine Image 1">
+</section>
+
+<div class="btn-section">
+    <button onclick="openPopup()">Click For Love 💖</button>
+</div>
+
+<!-- POPUP -->
+<div id="lovePopup" class="popup">
+    <div class="popup-content">
+        <span class="close-btn" onclick="closePopup()">×</span>
+        <h2>Happy Valentine's Day 💖</h2>
+        <img src="image/image4.jpg" class="doll">
+        <p>You are my sweetest love forever 💕</p>
+        <button onclick="createHearts()">I Love You 💌</button>
+    </div>
+</div>
+
+<script>
+const colorPicker = document.getElementById("colorPicker");
+
+colorPicker.addEventListener("input", function() {
+    document.documentElement.style.setProperty('--main-color', this.value);
+});
+
+function openPopup(){
+    document.getElementById("lovePopup").style.display = "flex";
+}
+
+function closePopup(){
+    document.getElementById("lovePopup").style.display = "none";
+}
+
+function createHearts(){
+    for(let i=0;i<20;i++){
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤";
+        heart.style.left = Math.random()*100 + "vw";
+        heart.style.fontSize = (Math.random()*20+10)+"px";
+        document.body.appendChild(heart);
+
+        setTimeout(()=>{ heart.remove(); },5000);
+    }
+}
+</script>
+
+</body>
+</html>
